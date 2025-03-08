@@ -7,7 +7,6 @@ const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 8080;
-const HOST = process.env.HOST || "http://localhost";
 
 // Swagger Options
 const swaggerOptions = {
@@ -18,14 +17,18 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "API documentation for Warranty Items using Swagger",
     },
-    servers: [{ url: HOST + ":" + PORT }],
+    servers: [
+      { url: "https://warantyapi.pictureai.in" },
+      { url: "http://localhost" + ":" + PORT },
+      { url: "http://13.126.188.121" + ":" + PORT },
+    ],
   },
   apis: ["./routes/*.js"],
 };
 
 // Initialize Swagger
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/api", warrantyRoutes);
 
