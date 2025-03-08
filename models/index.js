@@ -7,12 +7,11 @@ const Workflow = require("./workflow")(sequelize, Sequelize);
 const WorkflowAttachment = require("./workflowAttachment")(sequelize, Sequelize);
 
 // Associations
-// WarrantyItem.hasMany(WarrantyAttachment, { foreignKey: "attachmentId" });
+WarrantyItem.hasMany(WarrantyAttachment, { foreignKey: "fileId" });
 
-// WarrantyItem.hasMany(Workflow, { foreignKey: "warrantyItemId" });
-// Workflow.belongsTo(WarrantyItem, { foreignKey: "warrantyItemId" });
+WarrantyItem.hasMany(Workflow, { foreignKey: "warrantyItemId" });
 
-// Workflow.hasMany(WorkflowAttachment, { foreignKey: "fileId" });
+Workflow.hasMany(WorkflowAttachment, { foreignKey: "fileId" });
 // WorkflowAttachment.belongsTo(Workflow, { foreignKey: "fileId" });
 
 module.exports = {
